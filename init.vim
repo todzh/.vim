@@ -92,7 +92,8 @@ inoremap " ""<ESC>i
 
 "skip"
 func SkipPair()
-    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}'
+    let char = getline('.')[col('.') - 1] 
+    if char == ')' || char == ']' || char == '"' || char == "'" || char == '}' || char == '>'
         return "\<ESC>la"
     else
         return "\t"
@@ -100,14 +101,27 @@ func SkipPair()
 endfunc
 inoremap <TAB> <c-r>=SkipPair()<CR>
 
-func EnterInBrace()
+"enter in brace"
+func IntoBrace()
     if getline('.')[col('.') - 1] == '}' && getline('.')[col('.') - 2] == '{'
         return "\<CR>\<ESC>4XO"
     else
         return "\<CR>"
     endif
 endfunc
-inoremap <CR> <c-r>=EnterInBrace()<CR>
+inoremap <CR> <c-r>=IntoBrace()<CR>
+
+"delet pair"
+func DeletePair()
+    let first = getline('.')[col('.') - 2]
+    let second = getline('.')[col('.') - 1]
+    if first == '{' && second == '}' || first == '(' && second == ')' || first == '[' && second == ']' || first == "'" && second == "'" || first == '"' && second == '"'
+        return "\<BS>\<Del>"
+    else
+        return "\<BS>"
+    endif
+endfunc
+inoremap <BS> <c-r>=DeletePair()<CR>
 
 set cursorline
 
