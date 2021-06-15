@@ -122,6 +122,7 @@ func DeletePair()
     endif
 endfunc
 inoremap <BS> <c-r>=DeletePair()<CR>
+inoremap <c-h> <c-r>=DeletePair()<CR>
 
 set cursorline
 
