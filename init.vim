@@ -132,3 +132,4 @@ set hls
 set guifont=Courier\ New:h12
 colorscheme desert
 
+set ruler
